@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="~{layouts/header :: common_header(~{::title},~{::link},~{::script})}">
+      <title>Card Note :: This ain't FRESH!</title>
+      <link rel="stylesheet" th:href="@{/css/header.css}" />
+      <link rel="stylesheet" th:href="@{/css/index.css}" />
+      <script th:src="@{/js/index.js}"></script>
+    </head>
+    <body>
+      <header th:replace="~{layouts/header :: navbar}"></header>
+      <div
+              class="offcanvas offcanvas-start"
+              tabindex="-1"
+              id="offcanvasNavbar"
+              aria-labelledby="offcanvasNavbarLabel"
+            >
+              <div class="offcanvas-header">
+                <a sec:authorize="isAuthenticated()" id="user_login" th:href="@{/logout}">
+                  <img
+                    src="/img/user_login.png"
+                    alt="사용자 아이콘"
+                    width="50"
+                    height="50"
+                  />
+
+                  <!-- 로그인이 됐으면 -->
+                  <span
+                    th:text="|${principal.username}님 안녕하세요!|"
+                    class="offcanvas-title"
+                    id="offcanvasNavbarLabel"
+                  >
+                    유저 이름
+                  </span>
+                </a>
+
+                <a sec:authorize="!isAuthenticated()" id="user_login" th:href="@{/user/login}">
+                  <img
+                    src="/img/user_login.png"
+                    alt="사용자 아이콘"
+                    width="50"
+                    height="50"
+                  />
+
+                  <span
+                    class="offcanvas-title"
+                    id="offcanvasNavbarLabel"
+                  >
+                    로그인이 필요합니다!
+                  </span>
+                </a>
+                
+
+                <button
+                  class="btn-close btn-close-white"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                  <th:block th:if="${!#lists.isEmpty(tags)}">
+                    <li th:each="tag : ${tags}" class="nav-item">
+                      <a th:text="${tag.tagname}" class="nav-link" href="#"
+                        >태그 목록</a
+                      >
+                    </li>
+                  </th:block>
+                </ul>
+              </div>
+              <div sec:authorize="isAuthenticated()" class="offcanvas-footer text-end m-3">
+                <a th:href="@{/logout}">로그아웃</a>
+                <span style="display: none;" id="user_id" th:text="${principal.id}"></input>
+              </div>
+            </div>
+      <main class="p-3">
+        <div th:replace="~{modal/card-modal :: modal}">
+        </div>
+        <div th:replace="~{components/card :: card}">
+
+        </div>
+          <th:block th:if="${#lists.isEmpty(cardList)}">
+            <th:block sec:authorize="isAuthenticated()">
+              <p class="no-card text-center" >
+                아직 아무런 카드도 작성하지 않으셨네요 ㅠㅠ
+              </p>
+            </th:block>
+            <th:block sec:authorize="!isAuthenticated()">
+              <div class="no-card text-center">
+                로그인 후에 사용 가능합니다! <br>
+                <a th:href="@{/user/login}" class="btn btn-primary mt-2">로그인</a>
+              </div>
+            </th:block>
+        </th:block>
+        <div sec:authorize="isAuthenticated()" tabindex="-1" class="add-container">
+          <button id="addCard" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cardModal">
+            +
+          </button>
+        </div>
+      </main>
+      <footer th:replace="~{layouts/footer::common_footer}"></footer>
+      
+    </body>
+  </html>
+</html>

@@ -1,0 +1,20 @@
+<div
+  th:fragment="card"
+  th:if="${!#lists.isEmpty(cardList)}"
+  class="row row-cols-1 row-cols-md-5 g-4"
+>
+  <div
+    th:each="card : ${cardList}"
+    class="col"
+    data-bs-toggle="modal"
+    data-bs-target="#cardModal"
+  >
+    <div class="card">
+      <div class="card-body">
+        <input type="hidden" id="tempCardId" th:value="${card.id}" />
+        <h5 th:text="${card.title}" class="card-title">카드 제목</h5>
+        <p th:text="${card.content}" class="card-text">카드 내용</p>
+      </div>
+    </div>
+  </div>
+</div>

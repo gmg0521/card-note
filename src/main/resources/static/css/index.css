@@ -1,0 +1,26 @@
+.modal-title {
+  font-weight: bold;
+}
+
+.no-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: larger;
+  font-weight: bold;
+}
+
+.add-container {
+  position: absolute;
+  top: 85%;
+  left: 93%;
+}
+
+#addCard {
+  padding: 0;
+  width: 70px;
+  height: 75px;
+  filter: drop-shadow(6px 6px 2mm rgb(126, 125, 126));
+  font-size: xxx-large;
+}

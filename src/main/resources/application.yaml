@@ -1,0 +1,13 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      uri: mongodb+srv://admin:admin@portfolio.fiu1oj2.mongodb.net/
+      database: cards
+      # uri: mongodb: //546.465.445:27017/qwerqwer
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true

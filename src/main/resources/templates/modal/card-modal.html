@@ -1,0 +1,29 @@
+<div th:fragment="modal" sec:authorize="isAuthenticated()" class="modal fade" id="cardModal" tabindex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content">
+        <div class="modal-header">
+          <input type="hidden" id="cardId">
+          <input type="text" class="modal-title form-control fs-5" id="cardTitle" placeholder="제목"></input>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+          <div class="modal-body">
+            <textarea class="form-control" name="card-content" id="cardContent" cols="30" rows="10" placeholder="메모 작성"></textarea>
+            <div class="option-list mt-3">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                태그추가
+              </button>
+              <ul class="dropdown-menu">
+                <li><input class="form-control" type="text" id="tag" placeholder="#태그"></li>
+                <!-- TODO TAG 목록 추가 -->
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+          <button type="button" class="btn btn-primary" id="save">저장</button>
+        </div>
+      </form>
+    </div>
+  </div>
